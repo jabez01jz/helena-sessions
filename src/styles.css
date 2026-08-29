@@ -1,0 +1,161 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --radius-2xl: 10px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-sand: var(--sand);
+  --color-cream: var(--cream);
+  --color-neutral-soft: var(--neutral-soft);
+  --color-clay: var(--clay);
+  --color-cocoa: var(--cocoa);
+  --color-stone: var(--stone);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Jost", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 3px;
+
+  /* brand palette */
+  --ink: oklch(0.19 0.007 250); /* #0F1113 */
+  --stone: oklch(0.48 0.014 60); /* #6B6259 */
+  --cocoa: oklch(0.35 0.038 62); /* #5A4028 */
+  --sand: oklch(0.89 0.045 78); /* #F0D9B4 */
+  --clay: oklch(0.76 0.025 78); /* #C2B19C */
+  --cream: oklch(0.92 0.038 88); /* #F1E2C2 */
+  --neutral-soft: oklch(0.94 0 0); /* #EDEDED */
+
+  --background: oklch(0.977 0.011 85); /* #FBF8F2 */
+  --foreground: var(--ink);
+  --card: oklch(0.99 0.006 85);
+  --card-foreground: var(--ink);
+  --popover: oklch(0.99 0.006 85);
+  --popover-foreground: var(--ink);
+  --primary: var(--cocoa);
+  --primary-foreground: oklch(0.98 0.008 85);
+  --secondary: var(--cream);
+  --secondary-foreground: var(--cocoa);
+  --muted: var(--neutral-soft);
+  --muted-foreground: var(--stone);
+  --accent: var(--sand);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.55 0.19 27);
+  --destructive-foreground: oklch(0.98 0.008 85);
+  --border: oklch(0.86 0.02 78);
+  --input: oklch(0.86 0.02 78);
+  --ring: var(--cocoa);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  blockquote {
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: var(--sand);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--cocoa);
+    outline-offset: 3px;
+  }
+}
+
+@utility eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+@utility hairline {
+  height: 1px;
+  background: linear-gradient(to right, var(--clay), transparent);
+}
+
+@utility photo-mask {
+  --pm-x: linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
+  --pm-y: linear-gradient(to bottom, transparent 0%, #000 12%, #000 78%, transparent 100%);
+  mask-image: var(--pm-x), var(--pm-y);
+  mask-composite: intersect;
+  -webkit-mask-image: var(--pm-x), var(--pm-y);
+  -webkit-mask-composite: source-in;
+  mix-blend-mode: multiply;
+}
+
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 900ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 900ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@utility reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
